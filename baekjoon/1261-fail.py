@@ -19,6 +19,7 @@ N, M = list(map(int, input().split()))
 maze = [input() for _ in range(N)]
 visited = [[0 for _ in range(M)] for _ in range(N)]
 visited[0][0] = 1
+memo = {}
 def dfs(x, y, visited, broken):
     print(x, y)
     if x == N-1 and y == M-1:
