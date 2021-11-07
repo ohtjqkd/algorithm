@@ -15,8 +15,6 @@ for _ in range(N):
     for i in range(x1, x2+1):
         for j in range(y1, y2+1):
             board[i][j] += 1
-
-
 for b in board:
     for n in b:
         if n > M:
