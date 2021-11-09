@@ -10,7 +10,6 @@ encrypt_key = input()
 len_enc_key = len(encrypt_key)
 
 for i in range(len(normal_string)):
-    # print(normal_string[i], encrypt_key[i%len_enc_key])
     if normal_string[i] == " ":
         print(normal_string[i], end="")
         continue
