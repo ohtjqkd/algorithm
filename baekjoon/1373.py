@@ -17,7 +17,6 @@
 # print(ret)
 
 # ret = []
-b = list(input())
 # while b:
 #     if len(b) > 3:
 #         b, tmp = b[:-3], b[-3:]
@@ -37,6 +36,10 @@ b = list(input())
 #     ret.append(str(b%8))
 #     b //= 8
 # print(''.join(reversed(ret)))
+
+# 위에 코드랑 다른 점이 뭐지?
+# slicing하면서 더 많은 연산이 필요한건가?
+b = list(input())
 ret =[]
 b.reverse()
 for i in range(0, len(b), 3):

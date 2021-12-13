@@ -16,22 +16,22 @@ import sys
 input = sys.stdin.readline
 K = int(input())
 
-def solution(edges, nodes):
+def solution(edges, nodes, start):
     color = 1
-    nodes[0] = color
-    stack = [(0, nodes[0])]
+    nodes[start] = color
+    stack = [(i, nodes[i])]
     while stack:
         curr_node, curr_color = stack.pop()
         adjacents = edges[curr_node]
         for a in adjacents:
             if nodes[a] == curr_color:
-                return "NO"
+                return False
             elif nodes[a] == 0:
                 nodes[a] = curr_color*(-1)
                 stack.append((a, nodes[a]))
             else:
                 continue
-    return "YES"
+    return True
 
 for _ in range(K):
     V, E = map(int, input().split(" "))
@@ -40,4 +40,11 @@ for _ in range(K):
         n1, n2 = map(int, input().split(" "))
         edges[n1-1].append(n2-1)
         edges[n2-1].append(n1-1)
-    print(solution(edges, [0 for _ in range(V)]))
+    visited = [0 for _ in range(V)]
+    for i in range(V):
+        if visited[i] == 0:
+            if not solution(edges, visited, i):
+                print("NO")
+                break
+    else:
+        print("YES")
