@@ -1,6 +1,6 @@
-5 7
-WLLWWWL
-LLLWLLL
-LWLWLWW
-LWLWLLL
-WLLWLWW
+5 5
+#####
+#..B#
+#.#.#
+#RO.#
+#####

@@ -8,7 +8,8 @@ def get_str_list():
         ret.append(string)
     return ret
 
-def print_board(board):
-    for b in board:
-        print(b)
-    print()
+def print_board(*args):
+    for board in args:
+        for b in board:
+            print(b)
+        print()
