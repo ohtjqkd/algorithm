@@ -10,6 +10,7 @@ def get_str_list():
 
 def print_board(*args):
     for board in args:
+        print(board)
         for b in board:
             print(b)
         print()
