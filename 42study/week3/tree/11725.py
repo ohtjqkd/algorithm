@@ -20,7 +20,7 @@ while nodes:
     visited[curr] = 1 # 사용된 노드들은 1로 체크해줌
     children = edges[curr] # 간선 정보 list에서 curr와 연결된 모든 노드를 가져옴
     for child in children:
-        if visited[child] == 1: # 이미 체크 된 노드는 패스
+        if visited[child] == 1: # 이미 체크 된 노드는 패스 부모를
             continue
         parent[child] = curr # 체크가 된 노드가 아니라면 curr가 child의 부모 노드라는 의미
         nodes.append(child)

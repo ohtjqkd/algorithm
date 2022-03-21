@@ -8,17 +8,15 @@ input = sys.stdin.readline
 N = int(input())
 
 edges = [[] for _ in range(N)]
-weight = [0] * N
-cost = [0] * N
-indegree = [0] * N
+weight, cost, indegree = [0] * N, [0] * N, [0] * N
 for i in range(N):
     arr = list(map(int, input().split(" ")))
     weight[i], cost[i] = arr[0], arr[0]
+    indegree[i] = arr[1]
     for p in arr[2:]:
         if p - 1 > i:
             continue
         edges[p-1].append(i)
-        indegree[i] += 1
 q = deque([i for i in range(N) if indegree[i] == 0])
 while q:
     curr = q.popleft()

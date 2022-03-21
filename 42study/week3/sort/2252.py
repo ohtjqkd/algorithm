@@ -16,11 +16,11 @@ for _ in range(M):
 
 ## 깊이 우선 탐색도 가능하다!
 
-# q = deque([i for i, v in enumerate(indeg) if v == 0])
-q = [i for i, v in enumerate(indeg) if v == 0]
+q = deque([i for i, v in enumerate(indeg) if v == 0])
+# q = [i for i, v in enumerate(indeg) if v == 0]
 while q:
-    # curr = q.popleft()
-    curr = q.pop()
+    curr = q.popleft()
+    # curr = q.pop()
     ret.append(curr+1)
     for c in edges[curr]:
         indeg[c] -= 1
