@@ -46,7 +46,7 @@ for _ in range(Q):
 
 
 
-# recursion error = =
+# recursion error = =;
 # def dfs(node, sub_node, edges, parent):
 #     if len(edges[node]) == 1 and node != R - 1:
 #         sub_node[parent[node]] += sub_node[node]

@@ -10,21 +10,29 @@ def solution():
     N = int(input())
     pages = list(map(int, input().split(" ")))
     S = [[pages[i] if i == j else 0 for i in range(N)] for j in range(N)]
-    dp = [[pages[i] if i == j else float('inf') for i in range(N)] for j in range(N)]
+    dp = [[0 if i == j else float('inf') for i in range(N)] for j in range(N)]
+    A = [[i for j in range(N)] for i in range(N)]
     for i in range(N):
         for j in range(i, N):
             if i == j:
                 continue
-            if j - i == 1:
-                dp[i][j] = dp[i][j - 1] + dp[i + 1][j]
+            # if j - i == 1:
+                # dp[i][j] = dp[i][j - 1] + dp[i + 1][j]
             S[i][j] = S[i][j - 1] + S[j][j]
-
+    print("A",A)
     for i in range(2, N):
         for j in range(N - i):
-            for k in range(i):
-                r = dp[j][j + k] if j != j + k else 0
-                c = dp[j + k + 1][i + j] if j + k + 1!= i + j else 0
-                dp[j][i + j] = min(dp[j][i + j], r + c + S[j][i + j])
+            curr = dp[j][i + j]
+            print("target A:", A[j][i+j-1], A[j+1][i+j])
+            for k in range(A[j][i+j-1], A[j+1][i+j] + 1):
+                print(k)
+                r = dp[j][k]
+                c = dp[k + 1][i + j]
+                print("RC:", r, c)
+                if dp[j][i + j] >= r + c + S[j][i+j]:
+                    A[j][i+j] = k
+                    dp[j][i + j] = r + c + S[j][i + j]
+                print(A)
 
     print(dp[0][N - 1])
 
@@ -37,6 +45,7 @@ for _ in range(T):
 #           3   7
 #               4
 
+# a = 1, b = 2, c = 3, d = 4
 
 # 1   22  25  29  34  69  74  78  81
 

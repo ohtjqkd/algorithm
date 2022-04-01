@@ -6,4 +6,3 @@ trie = dict()
 
 def make_trie(str, trie):
     for s in str:
-        
