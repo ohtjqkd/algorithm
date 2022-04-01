@@ -12,7 +12,6 @@ def reverse(x, y):
         for j in range(3):
             init[x+i][y+j] ^= 1
 
-
 for i in range(N-2):
     for j in range(M-2):
         if init == target:
