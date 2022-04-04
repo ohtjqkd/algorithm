@@ -1,3 +1,4 @@
+from bisect import bisect, bisect_right, insort
 from collections import deque, defaultdict
 import sys
 input = sys.stdin.readline
@@ -5,54 +6,6 @@ write = sys.stdout.write
 # test case가 부족해..
 # 틀림
 
-# 난이도 안에 set(): number
-# 번호를 받으면 그 번호로 난이도 몇에 있는지 접근이 가능해야할 듯
-
-# class Binary:
-#     def __init__(self, number, difficulty, parent = None, left = None, right = None):
-#         self.left = left
-#         self.right = right
-#         self.parent = parent
-#         self.number = number
-#         self.difficulty = difficulty
-    
-#     def add(self, number, difficulty):
-#         if self.difficulty > difficulty:
-#             if self.left == None:
-#                 self.left = Binary(number, difficulty, self)
-#             else:
-#                 self.left.add(number, difficulty, self)
-#         elif self.difficulty < difficulty:
-#             if self.right == None:
-#                 self.right = Binary(number, difficulty, self)
-#             else:
-#                 self.right.add(number, difficulty, self)
-#         else:
-#             if self.number < number:
-#                 binary = Binary(number, difficulty, left = self)
-#                 if self.parent == None:
-#                     self.parent = Binary(number, difficulty, None)
-#                     self.parent.left = self
-#                 elif self.parent.left == self:
-#                     self.parent.left = Binary(number, difficulty, self.parent, left = self)
-#                 else:
-#                     self.parent.right = Binary(number, difficulty, self.parent, left = self)
-#             elif self.number > number:
-#                 binary = Binary(number, difficulty, right = self)
-#             if self.parent == None:
-#                 self.parent = binary
-#                 binary.left = self
-#             elif self.parent.left == self:
-#                 self.parent.left = Binary(number, difficulty, self.parent, left = self)
-#             else:
-#                 self.parent.right = Binary(number, difficulty, self.parent, left = self)
-#                 if self.parent == None:
-#                     self.parent = Binary(number, difficulty, None)
-#                     self.parent.right = self
-#                 elif self.parent.left == self:
-#                     self.parent.left =  Binary(number, difficulty, self.parent)
-#                 self.parent.left = 
-                
 class Node:
     def __init__(self, diff, number):
         self.diff = diff
@@ -135,7 +88,7 @@ class BST:
                     self.parent.right = None
             
             # 삭제할 노드가 자식 노드를 한 개 가지고 있을 때(왼쪽 자식 노드)
-            if self.current_node.left != None and self.current_node.right == None:
+            elif self.current_node.left != None and self.current_node.right == None:
                 if diff < self.parent.diff:
                     self.parent.left = self.current_node.left
                 elif diff > self.parent.diff:
@@ -146,7 +99,7 @@ class BST:
                     else:
                         self.parent.right = self.current_node.left
             # 삭제할 노드가 자식 노드를 한 개 가지고 있을 때(오른쪽 자식 노드)
-            if self.current_node.left == None and self.current_node.right != None:
+            elif self.current_node.left == None and self.current_node.right != None:
                 if diff < self.parent.diff:
                     self.parent.left = self.current_node.right
                 elif diff > self.parent.diff:
@@ -158,7 +111,7 @@ class BST:
                         self.parent.right = self.current_node.right
 
             # 삭제할 노드가 자식 노드를 두 개 가지고 있을 때
-            if self.current_node.left != None and self.current_node.right != None:
+            elif self.current_node.left != None and self.current_node.right != None:
                 self.change_node = self.current_node.right
                 self.change_node_parent = self.current_node.right
                 while self.change_node.left != None:
@@ -219,43 +172,136 @@ class BST:
             if curr.right:
                 q.append(curr.right)
 
+def search(tree, diff, number):
+    curr = 0
+    while curr < len(tree):
+        if diff < tree[curr][0]:
+            curr = curr * 2 + 1
+        elif diff > tree[curr][0]:
+            curr = curr * 2 + 2
+        else:
+            if number[curr][1] == number:
+                return curr
+            elif number < [curr][1]:
+                curr = curr * 2 + 1
+            else:
+                curr = curr * 2 + 2
+    
 
 
 
 N = int(input())
 
 where_number = [0] * 100001
-bst = BST(Node(50, float('inf')))
+command = []
+init_pair = []
+total_pair = []
 for i in range(N):
     num, dif = map(int, input().split(" "))
-    bst.insert(dif, num)
-    where_number[num] = dif
+    init_pair.append([num, dif])
+    total_pair.append([num, dif])
 
 M = int(input())
 
+
 for _ in range(M):
-    # bst.print_all_node()
     line = input().rstrip().split(" ")
+    com = line[0]
+    command.append(line)
+    if com == "add":
+        total_pair.append([int(line[1]), int(line[2])])
+total_pair.sort(key = lambda x: (x[1], x[0]))
+median = total_pair[len(total_pair)//2]
+init_pair.sort(key = lambda x: (abs(x[1] - median[1]), abs(x[0] - median[0])))
+# bst = BST(Node(init_pair[0][1], 5))
+
+bst = []
+for num, dif in init_pair:
+    insort(bst, (dif, num))
+    where_number[num] = dif
+is_changed = False
+# MAX_PROB = bst.find_max()
+# MIN_PROB = bst.find_min()
+for line in command:
     com = line[0]
     if com == "add":
         num, dif = int(line[1]), int(line[2])
-        bst.insert(dif, num)
+        insort(bst, (dif, num))
+        # bst.insert(dif, num)
         where_number[num] = dif
+        is_changed = True
     elif com == "solved":
         num = int(line[1])
         # print(f"target_number: {num}, target_diff: {where_number[num]}")
-        bst.delete(where_number[num], num)
+        # bst.delete(where_number[num], num)
+        idx = bisect_right(bst, (where_number[num], num))
+        
+        del(bst[idx-1])
         where_number[num] = 0
-    else:   
+        is_changed = True
+    else:
         want = int(line[1])
         if want == -1:
-            # pass
-            print(bst.find_min())
+            if is_changed:
+                # MIN_PROB = bst.find_min()
+                is_changed = False
+            # print(MIN_PROB)
+            print(bst[0][1])
         if want == 1:
-            # pass
-            print(bst.find_max())
+            if is_changed:
+                # MAX_PROB = bst.find_max()
+                is_changed = False
+            print(bst[-1][1])
+        print(bst)
+            # print(MAX_PROB)
 
+# 난이도 안에 set(): number
+# 번호를 받으면 그 번호로 난이도 몇에 있는지 접근이 가능해야할 듯
 
+# class Binary:
+#     def __init__(self, number, difficulty, parent = None, left = None, right = None):
+#         self.left = left
+#         self.right = right
+#         self.parent = parent
+#         self.number = number
+#         self.difficulty = difficulty
+    
+#     def add(self, number, difficulty):
+#         if self.difficulty > difficulty:
+#             if self.left == None:
+#                 self.left = Binary(number, difficulty, self)
+#             else:
+#                 self.left.add(number, difficulty, self)
+#         elif self.difficulty < difficulty:
+#             if self.right == None:
+#                 self.right = Binary(number, difficulty, self)
+#             else:
+#                 self.right.add(number, difficulty, self)
+#         else:
+#             if self.number < number:
+#                 binary = Binary(number, difficulty, left = self)
+#                 if self.parent == None:
+#                     self.parent = Binary(number, difficulty, None)
+#                     self.parent.left = self
+#                 elif self.parent.left == self:
+#                     self.parent.left = Binary(number, difficulty, self.parent, left = self)
+#                 else:
+#                     self.parent.right = Binary(number, difficulty, self.parent, left = self)
+#             elif self.number > number:
+#                 binary = Binary(number, difficulty, right = self)
+#             if self.parent == None:
+#                 self.parent = binary
+#                 binary.left = self
+#             elif self.parent.left == self:
+#                 self.parent.left = Binary(number, difficulty, self.parent, left = self)
+#             else:
+#                 self.parent.right = Binary(number, difficulty, self.parent, left = self)
+#                 if self.parent == None:
+#                     self.parent = Binary(number, difficulty, None)
+#                     self.parent.right = self
+#                 elif self.parent.left == self:
+#                     self.parent.left =  Binary(number, difficulty, self.parent)
+#                 self.parent.left = 
 
 
 # import sys
