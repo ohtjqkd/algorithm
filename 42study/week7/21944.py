@@ -1,22 +1,21 @@
 import sys, heapq
 
 si = sys.stdin.readline
-def MIIS(): return map(int, si().split())
+def MIIS(): return map(int, si().rstrip().split(" "))
 
 class CurrentInfo:
     def __init__(self):
         self.num_list = [[0 for _ in range(2)] for _ in range(100001)]
-        self.record = [dict() for _ in range(100001)]
     
     def solve(self, num):
         self.num_list[num][0], self.num_list[num][1] = 0, 0
     
     def add(self, num, diff, algo_num):
-        if self.record[num].get((diff, algo_num), False):
-            return
         if self.num_list[num][0] == 0 and self.num_list[num][1] == 0:
             self.num_list[num][0], self.num_list[num][1] = diff, algo_num
-            self.record[num][(diff, algo_num)] = True    
+        else:
+            return False
+        return True
     
     def is_in_heap(self, heap_info, searching_type):
         diff, num, algo_num = map(lambda x: x * -searching_type, heap_info)
@@ -42,7 +41,7 @@ class Recommend1:
             target_heap = self.min_heap[algo_num]
         while target_heap:
             if self.info.is_in_heap(target_heap[0], searching_type):
-                return -searching_type * target_heap[0][1] 
+                return -searching_type * target_heap[0][1]
             heapq.heappop(target_heap)
 
 class Recommend2:
@@ -99,20 +98,20 @@ recom_3 = Recommend3(info = info)
 
 for _ in range(n):
     num, difficulty, algo_num = MIIS()
-    recom_1.push(num, difficulty, algo_num)
-    recom_2.push(num, difficulty, algo_num)
-    recom_3.push(num, difficulty, algo_num)
-    info.add(num, difficulty, algo_num)
-
-m = int(si())
-for _ in range(m):
-    line = si().split()
-    if line[0] == 'add':
-        num, difficulty, algo_num = map(int, line[1:])
+    if info.add(num, difficulty, algo_num):
         recom_1.push(num, difficulty, algo_num)
         recom_2.push(num, difficulty, algo_num)
         recom_3.push(num, difficulty, algo_num)
-        info.add(num, difficulty, algo_num)
+
+m = int(si())
+for _ in range(m):
+    line = si().rstrip().split(" ")
+    if line[0] == 'add':
+        num, difficulty, algo_num = map(int, line[1:])
+        if info.add(num, difficulty, algo_num):
+            recom_1.push(num, difficulty, algo_num)
+            recom_2.push(num, difficulty, algo_num)
+            recom_3.push(num, difficulty, algo_num)
         
     elif line[0] == 'solved':
         info.solve(int(line[1]))
