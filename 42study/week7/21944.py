@@ -6,13 +6,15 @@ def MIIS(): return map(int, si().rstrip().split(" "))
 class CurrentInfo:
     def __init__(self):
         self.num_list = [[0 for _ in range(2)] for _ in range(100001)]
-    
+        self.record = [[set(), set()] for _ in range(100001)]
     def solve(self, num):
         self.num_list[num][0], self.num_list[num][1] = 0, 0
     
     def add(self, num, diff, algo_num):
-        if self.num_list[num][0] == 0 and self.num_list[num][1] == 0:
+        if self.num_list[num][0] == 0 and self.num_list[num][1] == 0 :# diff not in self.record[num][0] and algo_num not in self.record[num][1]:
             self.num_list[num][0], self.num_list[num][1] = diff, algo_num
+            self.record[num][0].add(diff)
+            self.record[num][1].add(algo_num)
         else:
             return False
         return True
@@ -81,7 +83,7 @@ class Recommend3:
             target_heap = self.min_heap
         elif searching_type == -1:
             target_heap = self.max_heap
-        while 0 <= diff < self.limit + 1:
+        while 0 < diff < self.limit + 1:
             while target_heap[diff]:
                 if self.info.is_in_heap(target_heap[diff][0], -searching_type):
                     return searching_type * target_heap[diff][0][1]
@@ -104,8 +106,12 @@ for _ in range(n):
         recom_3.push(num, difficulty, algo_num)
 
 m = int(si())
-for _ in range(m):
-    line = si().rstrip().split(" ")
+# for _ in range(m):
+while True:
+    line = si()
+    if not line:
+        break
+    line = line.rstrip().split(" ")
     if line[0] == 'add':
         num, difficulty, algo_num = map(int, line[1:])
         if info.add(num, difficulty, algo_num):
@@ -118,12 +124,16 @@ for _ in range(m):
 
     elif line[0] == 'recommend':
         algo_num, searching_type = map(int, line[1:])
-        print(recom_1.get_num_by_algo(algo_num, searching_type))
-
+        result = recom_1.get_num_by_algo(algo_num, searching_type)
+        if result != None:
+            print(result)
     elif line[0] == 'recommend2':
         searching_type = int(line[1])
-        print(recom_2.get_num(searching_type))
-
+        result = recom_2.get_num(searching_type)
+        if result != None:
+            print(result)
     elif line[0] == 'recommend3':
         searching_type, l = map(int, line[1:])
-        print(recom_3.get_num_from_diff(l, searching_type))
+        result = recom_3.get_num_from_diff(l, searching_type)
+        if result != None:
+            print(result)

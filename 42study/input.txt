@@ -4,16 +4,37 @@
 19998 78 2
 2667 37 3
 2042 55 3
-12
+20
 add 1402 59 1
+solved 1402
+add 1402 60 2
+solved 1402
+add 1402 61 3
+solved 1402
+add 1402 70 4
+solved 1402
+recommend 1 -1
 recommend 1 1
-recommend2 1
-recommend3 1 50
-recommend3 -1 50
-solved 1000
-solved 2667
+recommend 2 -1
 recommend 2 1
-recommend 1 -1
-recommend2 -1
+recommend 3 -1
+recommend 3 1
+recommend 4 -1
+recommend 4 1
+solved 1000
 solved 1001
-recommend 1 -1
+recommend2 -1
+recommend2 1
+recommend3 1 59
+recommend3 -1 59
+
+1000
+1001
+19998
+19998
+2667
+2042
+2667
+19998
+19998
+2042

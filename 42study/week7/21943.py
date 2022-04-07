@@ -6,12 +6,6 @@ N = int(input())
 X = list(map(int, input().split(" ")))
 P, Q = map(int, input().split(" "))
 
-
-
-
-
-
-
 # 시간초과>!ㅒㅖㅑㅛㄲ ㅔㄹㄴㅎ요 펳노아ㅔㄹ허ㅣ # visited = [0] * (N + 1)
 mem = [set() for _ in range(10)]
 mem = set()

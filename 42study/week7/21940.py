@@ -17,15 +17,16 @@ min_cost = float('inf')
 result = []
 K = int(input())
 start = list(map(lambda x: x-1, map(int, input().split(" "))))
-# for s in range(N):
-#     c2c[s][s] = 0
-#     stack = [s]
-#     while stack:
-#         now = stack.pop()
-#         for c, w in edges[now]:
-#             if c2c[s][now] + w < c2c[s][c]:
-#                 c2c[s][c] = c2c[s][now] + w
-#                 stack.append(c)
+
+for s in range(N):
+    c2c[s][s] = 0
+    stack = [s]
+    while stack:
+        now = stack.pop()
+        for c, w in edges[now]:
+            if c2c[s][now] + w < c2c[s][c]:
+                c2c[s][c] = c2c[s][now] + w
+                stack.append(c)
 
 # ------- mingue's code ------- #
 for i in range(N):

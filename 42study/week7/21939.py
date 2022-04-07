@@ -6,186 +6,186 @@ write = sys.stdout.write
 # test case가 부족해..
 # 틀림
 
-class Node:
-    def __init__(self, diff, number):
-        self.diff = diff
-        self.number = number
-        self.left = None
-        self.right = None
+# class Node:
+#     def __init__(self, diff, number):
+#         self.diff = diff
+#         self.number = number
+#         self.left = None
+#         self.right = None
 
-class BST:
-    def __init__(self, root):
-        self.root = root
+# class BST:
+#     def __init__(self, root):
+#         self.root = root
 
-    def insert(self, diff, number):
-        self.current_node = self.root
-        while True:
-            if diff < self.current_node.diff:
-                if self.current_node.left != None:
-                    self.current_node = self.current_node.left
-                else:
-                    self.current_node.left = Node(diff, number)
-                    break
-            elif diff > self.current_node.diff:
-                if self.current_node.right != None:
-                    self.current_node = self.current_node.right
-                else:
-                    self.current_node.right = Node(diff, number)
-                    break
-            else:
-                if number < self.current_node.number:                    
-                    if self.current_node.left != None:
-                        self.current_node = self.current_node.left
-                    else:
-                        self.current_node.left = Node(diff, number)
-                        break
-                else:
-                    if self.current_node.right != None:
-                        self.current_node = self.current_node.right
-                    else:
-                        self.current_node.right = Node(diff, number)
-                        break
+#     def insert(self, diff, number):
+#         self.current_node = self.root
+#         while True:
+#             if diff < self.current_node.diff:
+#                 if self.current_node.left != None:
+#                     self.current_node = self.current_node.left
+#                 else:
+#                     self.current_node.left = Node(diff, number)
+#                     break
+#             elif diff > self.current_node.diff:
+#                 if self.current_node.right != None:
+#                     self.current_node = self.current_node.right
+#                 else:
+#                     self.current_node.right = Node(diff, number)
+#                     break
+#             else:
+#                 if number < self.current_node.number:                    
+#                     if self.current_node.left != None:
+#                         self.current_node = self.current_node.left
+#                     else:
+#                         self.current_node.left = Node(diff, number)
+#                         break
+#                 else:
+#                     if self.current_node.right != None:
+#                         self.current_node = self.current_node.right
+#                     else:
+#                         self.current_node.right = Node(diff, number)
+#                         break
     
-    def search(self, diff):
-        self.current_node = self.root
-        while self.current_node:
-            if self.current_node.diff == diff:
-                return True
-            elif self.current_node.diff > diff:
-                self.current_node = self.current_node.left
-            else:
-                self.current_node = self.current_node.right
-        return False
+#     def search(self, diff):
+#         self.current_node = self.root
+#         while self.current_node:
+#             if self.current_node.diff == diff:
+#                 return True
+#             elif self.current_node.diff > diff:
+#                 self.current_node = self.current_node.left
+#             else:
+#                 self.current_node = self.current_node.right
+#         return False
     
-    def delete(self, diff, number):
-            # 삭제할 노드가 있는지 검사하고 없으면 False리턴
-            # 검사를 한 후에는 삭제할 노드가 current_node, 삭제할 노드의 부모 노드가 parent가 된다.
-            is_search = False
-            self.current_node = self.root
-            self.parent = self.root
-            while self.current_node:
-                if self.current_node.diff == diff:
-                    if self.current_node.number == number:
-                        is_search = True
-                        break
-                    elif number < self.current_node.number:
-                        self.current_node = self.current_node.left
-                    else:
-                        self.current_node = self.current_node.right
-                elif diff < self.current_node.diff:
-                    self.parent = self.current_node
-                    self.current_node = self.current_node.left
-                else:
-                    self.parent = self.current_node
-                    self.current_node = self.current_node.right
-            if is_search == False:
-                return False
-            # 삭제할 노드가 자식 노드를 갖고 있지 않을 때
-            if self.current_node.left == None and self.current_node.right == None:
-                if diff < self.parent.diff:
-                    self.parent.left = None
-                else:
-                    self.parent.right = None
+#     def delete(self, diff, number):
+#             # 삭제할 노드가 있는지 검사하고 없으면 False리턴
+#             # 검사를 한 후에는 삭제할 노드가 current_node, 삭제할 노드의 부모 노드가 parent가 된다.
+#             is_search = False
+#             self.current_node = self.root
+#             self.parent = self.root
+#             while self.current_node:
+#                 if self.current_node.diff == diff:
+#                     if self.current_node.number == number:
+#                         is_search = True
+#                         break
+#                     elif number < self.current_node.number:
+#                         self.current_node = self.current_node.left
+#                     else:
+#                         self.current_node = self.current_node.right
+#                 elif diff < self.current_node.diff:
+#                     self.parent = self.current_node
+#                     self.current_node = self.current_node.left
+#                 else:
+#                     self.parent = self.current_node
+#                     self.current_node = self.current_node.right
+#             if is_search == False:
+#                 return False
+#             # 삭제할 노드가 자식 노드를 갖고 있지 않을 때
+#             if self.current_node.left == None and self.current_node.right == None:
+#                 if diff < self.parent.diff:
+#                     self.parent.left = None
+#                 else:
+#                     self.parent.right = None
             
-            # 삭제할 노드가 자식 노드를 한 개 가지고 있을 때(왼쪽 자식 노드)
-            elif self.current_node.left != None and self.current_node.right == None:
-                if diff < self.parent.diff:
-                    self.parent.left = self.current_node.left
-                elif diff > self.parent.diff:
-                    self.parent.right = self.current_node.left
-                else:
-                    if number < self.parent.number:
-                        self.parent.left = self.current_node.left
-                    else:
-                        self.parent.right = self.current_node.left
-            # 삭제할 노드가 자식 노드를 한 개 가지고 있을 때(오른쪽 자식 노드)
-            elif self.current_node.left == None and self.current_node.right != None:
-                if diff < self.parent.diff:
-                    self.parent.left = self.current_node.right
-                elif diff > self.parent.diff:
-                    self.parent.right = self.current_node.right                
-                else:
-                    if number > self.parent.number:
-                        self.parent.left = self.current_node.right
-                    else:
-                        self.parent.right = self.current_node.right
+#             # 삭제할 노드가 자식 노드를 한 개 가지고 있을 때(왼쪽 자식 노드)
+#             elif self.current_node.left != None and self.current_node.right == None:
+#                 if diff < self.parent.diff:
+#                     self.parent.left = self.current_node.left
+#                 elif diff > self.parent.diff:
+#                     self.parent.right = self.current_node.left
+#                 else:
+#                     if number < self.parent.number:
+#                         self.parent.left = self.current_node.left
+#                     else:
+#                         self.parent.right = self.current_node.left
+#             # 삭제할 노드가 자식 노드를 한 개 가지고 있을 때(오른쪽 자식 노드)
+#             elif self.current_node.left == None and self.current_node.right != None:
+#                 if diff < self.parent.diff:
+#                     self.parent.left = self.current_node.right
+#                 elif diff > self.parent.diff:
+#                     self.parent.right = self.current_node.right                
+#                 else:
+#                     if number > self.parent.number:
+#                         self.parent.left = self.current_node.right
+#                     else:
+#                         self.parent.right = self.current_node.right
 
-            # 삭제할 노드가 자식 노드를 두 개 가지고 있을 때
-            elif self.current_node.left != None and self.current_node.right != None:
-                self.change_node = self.current_node.right
-                self.change_node_parent = self.current_node.right
-                while self.change_node.left != None:
-                    self.change_node_parent = self.change_node
-                    self.change_node = self.change_node.left
-                if self.change_node.right != None:
-                    self.change_node_parent.left = self.change_node.right
-                else:
-                    self.change_node_parent.left = None
+#             # 삭제할 노드가 자식 노드를 두 개 가지고 있을 때
+#             elif self.current_node.left != None and self.current_node.right != None:
+#                 self.change_node = self.current_node.right
+#                 self.change_node_parent = self.current_node.right
+#                 while self.change_node.left != None:
+#                     self.change_node_parent = self.change_node
+#                     self.change_node = self.change_node.left
+#                 if self.change_node.right != None:
+#                     self.change_node_parent.left = self.change_node.right
+#                 else:
+#                     self.change_node_parent.left = None
                     
-                if diff < self.parent.diff:
-                    self.parent.left = self.change_node
-                    self.change_node.right = self.current_node.right
-                    self.change_node.left = self.current_node.left
-                elif diff > self.parent.diff:
-                    self.parent.right = self.change_node
-                    self.change_node.left = self.current_node.left
-                    self.change_node.right = self.current_node.right
-                else:
-                    if number < self.parent.number:
-                        self.parent.left = self.change_node
-                        self.change_node.right = self.current_node.right
-                        self.change_node.left = self.current_node.left
-                    else:
-                        self.parent.right = self.change_node
-                        self.change_node.left = self.current_node.left
-                        self.change_node.right = self.current_node.right
+#                 if diff < self.parent.diff:
+#                     self.parent.left = self.change_node
+#                     self.change_node.right = self.current_node.right
+#                     self.change_node.left = self.current_node.left
+#                 elif diff > self.parent.diff:
+#                     self.parent.right = self.change_node
+#                     self.change_node.left = self.current_node.left
+#                     self.change_node.right = self.current_node.right
+#                 else:
+#                     if number < self.parent.number:
+#                         self.parent.left = self.change_node
+#                         self.change_node.right = self.current_node.right
+#                         self.change_node.left = self.current_node.left
+#                     else:
+#                         self.parent.right = self.change_node
+#                         self.change_node.left = self.current_node.left
+#                         self.change_node.right = self.current_node.right
 
-            return True
+#             return True
 
-    def find_min(self):
-        node = self.root
-        # print(node.diff, node.number)
-        while node.left:
-            node = node.left
-            # print(node.diff, node.number)
-        if node == self.root:
-            return node.right.number
-        return node.number
+#     def find_min(self):
+#         node = self.root
+#         # print(node.diff, node.number)
+#         while node.left:
+#             node = node.left
+#             # print(node.diff, node.number)
+#         if node == self.root:
+#             return node.right.number
+#         return node.number
     
-    def find_max(self):
-        node = self.root
-        # print(node.left.diff, node.left.number)
-        while node.right:
-            node = node.right
-            # print(node.diff, node.number)
-        if node == self.root:
-            return node.left.number
-        return node.number
+#     def find_max(self):
+#         node = self.root
+#         # print(node.left.diff, node.left.number)
+#         while node.right:
+#             node = node.right
+#             # print(node.diff, node.number)
+#         if node == self.root:
+#             return node.left.number
+#         return node.number
     
-    def print_all_node(self):
-        q = deque([self.root])
-        while q:
-            curr = q.popleft()
-            # print(f"diff: {curr.diff}, num: {curr.number}")
-            if curr.left:
-                q.append(curr.left)
-            if curr.right:
-                q.append(curr.right)
+#     def print_all_node(self):
+#         q = deque([self.root])
+#         while q:
+#             curr = q.popleft()
+#             # print(f"diff: {curr.diff}, num: {curr.number}")
+#             if curr.left:
+#                 q.append(curr.left)
+#             if curr.right:
+#                 q.append(curr.right)
 
-def search(tree, diff, number):
-    curr = 0
-    while curr < len(tree):
-        if diff < tree[curr][0]:
-            curr = curr * 2 + 1
-        elif diff > tree[curr][0]:
-            curr = curr * 2 + 2
-        else:
-            if number[curr][1] == number:
-                return curr
-            elif number < [curr][1]:
-                curr = curr * 2 + 1
-            else:
-                curr = curr * 2 + 2
+# def search(tree, diff, number):
+#     curr = 0
+#     while curr < len(tree):
+#         if diff < tree[curr][0]:
+#             curr = curr * 2 + 1
+#         elif diff > tree[curr][0]:
+#             curr = curr * 2 + 2
+#         else:
+#             if number[curr][1] == number:
+#                 return curr
+#             elif number < [curr][1]:
+#                 curr = curr * 2 + 1
+#             else:
+#                 curr = curr * 2 + 2
     
 
 
