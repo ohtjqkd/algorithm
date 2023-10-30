@@ -1,3 +1,9 @@
+# input
+# 5
+# 1 1 1 6 0
+# 2 7 8 3 1
+# output
+# 18
 def solution(a, b):
     ret = 0
     a.sort()
@@ -10,7 +16,3 @@ n = int(input())
 a = list(map(int, input().split(" ")))
 b = list(map(int, input().split(" ")))
 print(solution(a, b))
-# input
-# 5
-# 1 1 1 6 0
-# 2 7 8 3 1

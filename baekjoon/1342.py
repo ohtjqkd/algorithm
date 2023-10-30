@@ -2,6 +2,7 @@
 # aabbbaa
 # output
 # 1
+# FIXME
 # pypy로 실행시 통과
 from collections import Counter
 S = list(input())

@@ -1,3 +1,6 @@
+# TODO
+# refactoring
+
 from collections import defaultdict
 result = 0
 cand = defaultdict(list)

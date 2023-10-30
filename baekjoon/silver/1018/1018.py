@@ -1,3 +1,19 @@
+# input
+# 11 12
+# BWWBWWBWWBWW
+# BWWBWBBWWBWW
+# WBWWBWBBWWBW
+# BWWBWBBWWBWW
+# WBWWBWBBWWBW
+# BWWBWBBWWBWW
+# WBWWBWBBWWBW
+# BWWBWBWWWBWW
+# WBWWBWBBWWBW
+# BWWBWBBWWBWW
+# WBWWBWBBWWBW
+# output
+# 15
+
 n, m = map(int, input().split())
 board = [input() for _ in range(n)]
 result = n*m

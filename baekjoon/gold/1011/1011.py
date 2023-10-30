@@ -9,11 +9,11 @@ for _ in range(int(input())):
         print(2)
     else:
         while True:
-            if (i+2)*(i+1) < distance:
+            if (i+1)*i < distance:
                 i += 1
             else:
                 break
-        if distance-(i+1)*i <= i+1:
-            print((i+1)*2-1)
+        if distance <= i**2:
+            print(i*2-1)
         else:
-            print((i+1)*2)
+            print(i*2)

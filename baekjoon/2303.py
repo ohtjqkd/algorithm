@@ -1,3 +1,6 @@
+# TODO
+# Find another way
+
 # input
 # 3
 # 7 5 5 4 9
@@ -18,4 +21,3 @@ for i in range(N):
                     ret = i+1
                     max_value = S
 print(ret)
-                    
