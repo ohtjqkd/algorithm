@@ -12,5 +12,7 @@ A = list(map(int, input().split()))
 B = sorted(A)
 for idx, a in enumerate(B):
   idx_map[a].append(idx)
+  
+print(idx_map)
 ret = [str(idx_map[a].popleft()) for a in A]
 print(' '.join(ret))
