@@ -8,12 +8,4 @@ a, b = list(map(int, input().split()))
 a = set(map(int, input().split()))
 b = set(map(int, input().split()))
 
-# a = list(map(int, input().split()))
-# b = list(map(int, input().split()))
-
-# a.sort()
-# b.sort()
-
-
-
 print(len(a^b))

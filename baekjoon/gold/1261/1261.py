@@ -26,6 +26,9 @@ while heap:
     w, x, y = heapq.heappop(heap)
     for i in range(4):
         xx, yy = x+dx[i], y+dy[i]
+        if xx == M-1 and yy == N-1:
+            print(w)
+            exit()
         if 0 <= xx < M and 0 <= yy < N:
             if maze[xx][yy] == '0' and distances[xx][yy] > w:
                 heapq.heappush(heap, (w, xx, yy))

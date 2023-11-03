@@ -10,6 +10,7 @@ for idx, n in enumerate(nums):
     cand[n].append(idx)
 cand_perm = []
 li = sorted(list(cand.items()))
+print(li)
 for i in range(len(li)):
     if li[i][0] == 0:
         continue

@@ -1,4 +1,23 @@
 # 가운데를 말해요
+# 이거 AVL tree 구현하는 문제인듯 -
+# input
+# 7
+# 1
+# 5
+# 2
+# 10
+# -99
+# 7
+# 5
+# output
+# 1
+# 1
+# 2
+# 2
+# 2
+# 2
+# 5
+
 import sys
 from heapq import heappush, heappop
 
@@ -25,25 +44,3 @@ for _ in range(N):
         heappush(max_heap, -min_pop)
     print(-max_heap[0])
 
-
-
-
-#
-# def find_idx(tree, value):
-#     start, end = 0, len(tree)
-#     while start < end:
-#         mid = (start + end) // 2
-#         if tree[mid] < value:
-#             start = mid + 1
-#         elif tree[mid] > value:
-#             end = mid - 1
-#         else:
-#             break
-#     return (start + end) // 2
-
-# N = int(input())
-# for _ in range(N):
-#     value = int(input())
-#     idx = find_idx(tree, value) + 1
-#     tree = tree[:idx] + [value] + tree[idx:]
-#     print(tree[len(tree)//2 + len(tree) % 2 - 1])

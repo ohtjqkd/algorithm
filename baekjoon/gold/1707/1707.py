@@ -21,8 +21,10 @@ def solution(edges, nodes, start):
     nodes[start] = color
     stack = [(i, nodes[i])]
     while stack:
+        print("stack", stack)
         curr_node, curr_color = stack.pop()
         adjacents = edges[curr_node]
+        print(adjacents)
         for a in adjacents:
             if nodes[a] == curr_color:
                 return False
@@ -42,6 +44,7 @@ for _ in range(K):
         edges[n2-1].append(n1-1)
     visited = [0 for _ in range(V)]
     for i in range(V):
+        print(visited)
         if visited[i] == 0:
             if not solution(edges, visited, i):
                 print("NO")
