@@ -1,16 +1,21 @@
 # 실행속도가 빠른 순서대로
 
-n = int(input())
-count = 0
-i = 666
-while True:
-    #내장 in method
-    # if '666' in str(i):
-    #     count += 1
-    # if count == n:
-    #     print(i)
-    #     break
-    # i += 1
+# x = int(input())
+
+def solution(n: int):
+    count = 0
+    i = 666
+    while True:
+        #내장 in method
+        if '666' in str(i):
+            count += 1
+        if count == n:
+            print(i)
+            break
+        i += 1
+for i in range(1, 500):
+    solution(i)
+
 
     # 단방향 세개씩
     # str_i = str(i)
