@@ -8,6 +8,7 @@ stack = []
 result = []
 idx = 0
 while numbers or stack:
+    print(numbers, stack)
     if stack and target[idx] == stack[-1]:
         stack.pop()
         result.append("-")
