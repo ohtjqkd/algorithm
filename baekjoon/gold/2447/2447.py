@@ -1,5 +1,4 @@
 n = int(input())
-start = [['']*n for _ in range(n)]
 board = [[' '] * n for _ in range(n)]
 
 

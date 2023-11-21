@@ -10,9 +10,10 @@ def sub(a, b):
 
 curr = 0
 ans = 0
-for i in range(1, len(s)):
+for i in range(len(s)):
   if s[i] == '-' or s[i] == '+':
-    e.append(int(s[curr:i]))
+    if s[curr:i] != '':
+      e.append(int(s[curr:i]))
     e.append(s[i])
     curr = i + 1
   elif i == len(s) - 1:

@@ -123,7 +123,6 @@ func (h *Heap) down(idx int) {
 		} else {
 			break
 		}
-
 	}
 }
 
