@@ -11,7 +11,6 @@
 # output: 9
 
 from collections import deque
-from my_module.modules import print_board
 
 def solution():
     N = int(input())
