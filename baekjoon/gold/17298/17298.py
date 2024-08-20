@@ -1,3 +1,9 @@
+# input
+# 4
+# 3 5 2 7
+# output
+# 5 7 7 -1
+
 N = int(input())
 
 A = list(map(int, input().split(" ")))
