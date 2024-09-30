@@ -12,6 +12,8 @@ elif [ "c" == $1 ]; then
   cat input.txt | ./a.out > output.txt
 elif [ "java" == $1 ]; then
   cat input.txt | java $file > output.txt
+elif [ "python" == $1 ]; then
+  cat input.txt | python $file > output.txt
 else
   echo "Invalid language"
   exit 1;

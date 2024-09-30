@@ -8,8 +8,8 @@ def sudoku(arr, locations):
         return arr
     else:
         x, y = locations[0]
-        reserve = sample-set(arr[x])-{arr[0][y], arr[1][y], arr[2][y], arr[3][y], arr[4][y], arr[5][y], arr[6][y], arr[7][y], arr[8][y]}-set(
-            arr[(x//3)*3][(y//3)*3:(y//3)*3+3])-set(arr[(x//3)*3+1][(y//3)*3:(y//3)*3+3])-set(arr[(x//3)*3+2][(y//3)*3:(y//3)*3+3])
+        reserve = sample-set(arr[x])-{arr[0][y], arr[1][y], arr[2][y], arr[3][y], arr[4][y], arr[5][y], arr[6][y], arr[7][y], arr[8][y]} \
+            -set(arr[(x//3)*3][(y//3)*3:(y//3)*3+3])-set(arr[(x//3)*3+1][(y//3)*3:(y//3)*3+3])-set(arr[(x//3)*3+2][(y//3)*3:(y//3)*3+3])
         for i in reserve:
             arr[x][y] = i
             tmp_arr = sudoku(arr, locations[1:])
